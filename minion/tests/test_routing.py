@@ -150,8 +150,8 @@ class MapperTestMixin(object):
         )
 
     def test_it_can_build_named_routes(self):
-        self.mapper.add(b"/", view, route_name=u"home")
-        self.assertEqual(self.mapper.lookup(u"home"), b"/")
+        self.mapper.add(b"/", view, route_name="home")
+        self.assertEqual(self.mapper.lookup("home"), b"/")
 
     def test_unknown_route_names_become_literal_paths(self):
         self.assertEqual(self.mapper.lookup(b"/work"), b"/work")
@@ -162,8 +162,8 @@ class MapperTestMixin(object):
         self.assertIsNone(render)
 
     def test_extra_build_arguments_become_query_strings(self):
-        self.mapper.add(b"/", view, route_name=u"home")
-        url = self.mapper.lookup(u"home", thing=b"yes")
+        self.mapper.add(b"/", view, route_name="home")
+        url = self.mapper.lookup("home", thing=b"yes")
         self.assertEqual(url, b"/?thing=yes")
 
 
@@ -202,7 +202,7 @@ class TestRoutesMapper(MapperTestMixin, TestCase):
         )
 
     def test_it_builds_routes_with_arguments(self):
-        self.mapper.add(b"/{year}", view, route_name=u"year")
+        self.mapper.add(b"/{year}", view, route_name="year")
         url = self.mapper.lookup(b"year", year=2012)
         self.assertEqual(url, b"/2012")
 
@@ -220,8 +220,8 @@ class TestWerkzeugMapper(MapperTestMixin, TestCase):
         self.assertEqual(json.loads(render(request).content), {b"year" : 2013})
 
     def test_it_builds_routes_with_arguments(self):
-        self.mapper.add(b"/<int:year>", view, route_name=u"year")
-        url = self.mapper.lookup(u"year", year=2012)
+        self.mapper.add(b"/<int:year>", view, route_name="year")
+        url = self.mapper.lookup("year", year=2012)
         self.assertEqual(url, b"/2012")
 
     def test_it_handles_routing_redirects(self):

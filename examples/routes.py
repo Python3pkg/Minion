@@ -9,7 +9,7 @@ app = Application(router=Router(mapper=RoutesMapper()))
 
 @app.route("/greet/{user}", greeting="Hey")
 def greet(request, greeting, user):
-    return Response(u"{} {}\n".format(greeting, user).encode("utf-8"))
+    return Response("{} {}\n".format(greeting, user).encode("utf-8"))
 
 
 wsgi = create_app(app)

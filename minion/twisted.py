@@ -1,4 +1,4 @@
-from __future__ import absolute_import
+
 
 from twisted.web.resource import IResource
 from zope.interface import implementer

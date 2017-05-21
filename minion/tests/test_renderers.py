@@ -14,26 +14,26 @@ class TestUnicodeRenderer(TestCase):
 
     def test_it_renders_via_the_given_encoding(self):
         renderer = renderers.Unicode(encoding="utf-8")
-        render = renderers.bind(renderer, to=lambda _ : u"שלום")
+        render = renderers.bind(renderer, to=lambda _ : "שלום")
         self.assertEqual(
-            render(self.request), Response(u"שלום".encode("utf-8")),
+            render(self.request), Response("שלום".encode("utf-8")),
         )
 
     def test_encoding_ignoring_errors(self):
         renderer = renderers.Unicode(encoding="ascii", errors="ignore")
-        render = renderers.bind(renderer, to=lambda _ : u"שלום")
+        render = renderers.bind(renderer, to=lambda _ : "שלום")
         self.assertEqual(render(self.request), Response(b""))
 
     def test_encoding_errors_by_default(self):
         renderer = renderers.Unicode(encoding="ascii")
-        render = renderers.bind(renderer, to=lambda _ : u"שלום")
+        render = renderers.bind(renderer, to=lambda _ : "שלום")
         with self.assertRaises(UnicodeEncodeError):
             render(self.request)
 
     def test_UTF8(self):
-        render = renderers.bind(renderers.UTF8, to=lambda _ : u"שלום")
+        render = renderers.bind(renderers.UTF8, to=lambda _ : "שלום")
         self.assertEqual(
-            render(self.request), Response(u"שלום".encode("utf-8")),
+            render(self.request), Response("שלום".encode("utf-8")),
         )
 
 
